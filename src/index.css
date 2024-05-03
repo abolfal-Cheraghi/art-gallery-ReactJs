@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* fonts */
+@font-face {
+  font-family: "YekanBakh";
+  src: url("./assets/fonts/YekanBakhFaNum-Regular.woff2");
+}
+@font-face {
+  font-family: "YekanBakh-bold";
+  src: url("./assets/fonts/YekanBakhFaNum-SemiBold.woff2");
+}
+@font-face {
+  font-family: "Rokh";
+  src: url("./assets/fonts/RokhFaNum-SemiBold.woff2");
+}
+@font-face {
+  font-family: "Rokh-Bold";
+  src: url("./assets/fonts/RokhFaNum-Bold.woff2");
+}
+/* reset css */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "YekanBakh";
+  transition: all 0.3s;
+}
