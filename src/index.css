@@ -5,10 +5,16 @@
 /* fonts */
 @font-face {
   font-family: "YekanBakh";
+  font-style: normal;
+  font-weight: 300;
+  font-display: auto;
   src: url("./assets/fonts/YekanBakhFaNum-Regular.woff2");
 }
 @font-face {
   font-family: "YekanBakh-bold";
+  font-style: normal;
+  font-weight: 500;
+  font-display: auto;
   src: url("./assets/fonts/YekanBakhFaNum-SemiBold.woff2");
 }
 @font-face {
@@ -26,4 +32,106 @@
   box-sizing: border-box;
   font-family: "YekanBakh";
   transition: all 0.3s;
+}
+
+/* img */
+.img-fluid {
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.menu-sidebar {
+  transition-timing-function: ease-in-out;
+}
+/* style body */
+body {
+  @apply bg-[#ebebeb] dark:bg-accent;
+}
+
+/* components  */
+@layer components {
+  /* components buttons  */
+  .btn-secondary {
+    @apply bg-g-secondary duration-500 text-white rounded-xl flex gap-2 items-center font-yekanbakh-bold;
+  }
+  .btn-primary {
+    @apply bg-g-primary  duration-500 text-white rounded-xl flex gap-2 items-center text-s-13 font-yekanbakh-bold;
+  }
+  .btn-accent {
+    @apply bg-accent  duration-500 text-white rounded-xl flex gap-2 items-center text-s-13 font-yekanbakh-bold;
+  }
+
+  /* components typography */
+  .title {
+    @apply text-accent font-rokh-bold text-s-17 md:text-xl lg:text-s-26;
+  }
+  .title-box{
+    @apply text-accent font-rokh-bold text-[20px] lg:text-[23px];
+  }
+  .paragraph {
+    @apply text-gray text-s-13 md:text-sm font-yekanbakh;
+    line-height: 1.625rem !important;
+  }
+  .title-cart-18 {
+    @apply text-accent text-lg font-rokh;
+  }
+  .title-cart-15 {
+    @apply text-accent text-s-15 font-rokh;
+  }
+
+  .text-blockqute {
+    @apply text-accent w-fit text-s-15 md:text-xl font-rokh relative px-7 flex items-center justify-center;
+  }
+  .text-blockqute::before {
+    content: "";
+    @apply h-4 w-5 absolute right-0  bg-cover bg-no-repeat;
+    background-image: url(./assets/svg/Group-21.svg);
+  }
+  .text-blockqute::after {
+    content: "";
+    @apply h-4 w-5 absolute left-0  bg-cover bg-no-repeat rotate-180;
+    background-image: url(./assets/svg/Group-21.svg);
+  }
+}
+/* utitlities  */
+@layer utilities {
+  .show-sidebar {
+    white-space: nowrap;
+    @apply duration-700 w-10/12;
+  }
+  .close-sidebar {
+    flex-basis: 0;
+  }
+}
+
+/* .menu-sidebar {
+  flex: 0 0 200px;
+  flex-direction: column;
+  backdrop-filter: blur(30px) saturate(2);
+  -webkit-backdrop-filter: blur(30px) saturate(2);
+  padding-inline: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: 2.2s cubic-bezier(0.36, -0.01, 0, 0.77);
+  height: 100%;
+  white-space: nowrap;
+} */
+
+/* active list item navbar */
+.active {
+  @apply text-g-secondary relative duration-500;
+}
+.active::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  @apply bg-g-primary rounded-full absolute -right-4 top-[7px] transition-all duration-500;
+  box-shadow: 0 0 0px 2px #e3353567;
+}
+.menu-phone .active {
+  box-shadow: none;
+  @apply text-g-secondary;
+}
+.menu-phone .active::before {
+  all: unset;
 }

@@ -1,0 +1,223 @@
+{
+  "category_products": [
+    {
+      "id": 1,
+      "category": "آبرنگ",
+      "category_Value": "watercolor",
+      "desc_category": ""
+    },
+    {
+      "id": 2,
+      "category": "پاستل",
+      "category_Value": "pastel",
+      "desc_category": ""
+    },
+    {
+      "id": 3,
+      "category": "تخته نقاشی",
+      "category_Value": "drawing-board",
+      "desc_category": ""
+    },
+    {
+      "id": 4,
+      "category": "ست طراحی",
+      "category_Value": "Design-set",
+      "desc_category": ""
+    },
+    {
+      "id": 5,
+      "category": "قلمو",
+      "category_Value": "brush",
+      "desc_category": ""
+    }
+  ],
+  "Product_brand": [
+    { "id": 1, "brand-Name": "پیکاسو", "brand-Value": "picaso" },
+    { "id": 2, "brand-Name": "رنگینو", "brand-Value": "rangino" }
+  ],
+  "menu": [
+    {
+      "id": 1,
+      "MenuName": "منوی navbar",
+      "itemsMenu": [
+        {
+          "id": 1,
+          "name": "صفحه اصلی",
+          "path": "/"
+        },
+        {
+          "id": 2,
+          "name": "فروشگاه",
+          "path": "/shop"
+        },
+        {
+          "id": 3,
+          "name": "نمونه کارها",
+          "path": "/portfolio"
+        },
+        {
+          "id": 4,
+          "name": "سفارش کار",
+          "path": "/order-request"
+        },
+        {
+          "id": 5,
+          "name": "وبلاگ",
+          "path": "/blog"
+        },
+        {
+          "id": 6,
+          "name": "درباره ما",
+          "path": "/about"
+        },
+        {
+          "id": 7,
+          "name": "تماس باما",
+          "path": "/contact"
+        }
+      ]
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "category": "پاستل",
+      "name": "پاستل گچی 48 رنگ کوه نور مدل جعبه چوبی کد 8596",
+      "inventory": "10",
+      "name_EN": "Chalk pastel, 48 colors, Koh Noor, model, wooden box, code 8596",
+      "img": "https://halochin.ir/art-gallery/wp-content/uploads/2023/11/product-7.jpg",
+      "price": "495000",
+      "discount": {
+        "percent": null,
+        "a_price": null
+      },
+      "short_desc": [
+        "نوع قلم مو :گرد",
+        "جنس دسته :پلاستیک",
+        "نوع مو :نرم",
+        "جنس مو :مصنوعی",
+        "اندازه دسته :کوتاه"
+      ],
+      "long_desc": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.",
+      "brand": ["پیکاسو", "رنگینو"],
+      "guarantee": null
+    },
+    {
+      "id": 2,
+      "category": "ُست طراحی",
+      "name": "ست طراحی استدلر مدل جامبو مجموعه 12 عددی",
+      "inventory": "10",
+      "name_EN": "Stadler design set, Jumbo model, 12 pieces",
+      "img": "https://halochin.ir/art-gallery/wp-content/uploads/2023/11/product-6.jpg",
+      "gallery": [
+        "https://halochin.ir/art-gallery/wp-content/uploads/2023/11/product-6.jpg",
+        "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/product-4-min.jpg",
+        "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/product-2-min-1.jpg"
+      ],
+      "price": "799000",
+      "discount": {
+        "percent": 6,
+        "a_price": null
+      },
+      "short_desc": ["", "", "", "", ""],
+      "long_desc": "",
+      "brand": null,
+      "guarantee": null
+    },
+    {
+      "id": 3,
+      "category": "ست طراحی",
+      "name": "گواش 12 رنگ پارس مدل 0036",
+      "inventory": "10",
+      "name_EN": "Gouache 12 colors Pars model 0036",
+      "img": "https://halochin.ir/art-gallery/wp-content/uploads/2023/11/product-5.jpg",
+      "gallery": null,
+      "price": "109000",
+      "discount": {
+        "percent": null,
+        "a_price": null
+      },
+      "short_desc": ["", "", "", "", ""],
+      "long_desc": "",
+      "brand": null,
+      "guarantee": null
+    },
+    {
+      "id": 4,
+      "category": "ُست طراحی",
+      "name": "مداد رنگی 24 رنگ آرت لاین مدل ECP24PLS/IL",
+      "inventory": "10",
+      "name_EN": "24-color art line colored pencil model ECP24PLS/IL",
+      "img": "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/product-4-min.jpg",
+      "gallery": null,
+      "price": "229000",
+      "discount": {
+        "percent": 8,
+        "a_price": null
+      },
+      "short_desc": ["", "", "", "", ""],
+      "long_desc": "",
+      "brand": null,
+      "guarantee": null
+    },
+    {
+      "id": 5,
+      "category": "آبرنگ",
+      "name": "آبرنگ 12 رنگ طرح بوم نقاشی مدل ملکا",
+      "inventory": "10",
+      "name_EN": "12 colors of watercolor, Melka model canvas design",
+      "img": "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/product-3-min.jpg",
+      "gallery": null,
+      "price": "137000",
+      "discount": {
+        "percent": null,
+        "a_price": null
+      },
+      "short_desc": ["", "", "", "", ""],
+      "long_desc": "",
+      "brand": null,
+      "guarantee": null
+    },
+    {
+      "id": 6,
+      "category": "تخته نقاشی",
+      "name": "تخته شاسی طرح نقاشی گربه آبرنگی کد 3920032 سایز A4",
+      "inventory": "10",
+      "name_EN": "Chassis board with watercolor cat drawing, code 3920032, size A4",
+      "img": "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/product-2-min-1.jpg",
+      "gallery": null,
+      "price": "599000",
+      "discount": {
+        "percent": 6,
+        "a_price": null
+      },
+      "short_desc": ["", "", "", "", ""],
+      "long_desc": "",
+      "brand": null,
+      "guarantee": null
+    },
+    {
+      "id": 7,
+      "category": "قلمو",
+      "name": "قلمو گرد کد 717-2 مجموعه 6 عددی",
+      "inventory": "10",
+      "name_EN": "Round brush, code 717-2, set of 6 pieces",
+      "img": "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/product-1.jpg",
+      "gallery": null,
+      "price": null,
+      "discount": {
+        "percent": null,
+        "a_price": "123000"
+      },
+      "short_desc": ["", "", "", "", ""],
+      "long_desc": "",
+      "brand": null,
+      "guarantee": null
+    }
+  ],
+  "orders": [{ "id": 1 }],
+  "comments": [{ "id": 1 }],
+  "articles": [{ "id": 1 }],
+  "category_article": [{ "id": 1 }],
+  "users": [{ "id": 1 }]
+}

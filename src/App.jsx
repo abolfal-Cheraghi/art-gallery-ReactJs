@@ -1,16 +1,24 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee } from "@fortawesome/free-solid-svg-icons";
-import Switcher from "./components/Switcher";
+import { useRoutes } from "react-router-dom";
+import Header, { contextHeader } from "./components/header/Header";
+import { myRoutes } from "./routes";
+import { useContext, useEffect, useLayoutEffect } from "react";
 
 function App() {
+  const routes = useRoutes(myRoutes);
+
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [routes]);
+
+  useEffect(() => {
+    // console.log(showsSidebar);
+  }, [routes]);
   return (
-    <div className="w-full bg-g-secondary  dark:bg-accent">
-      <Switcher />
-      <h1 className="text-rokh text-s-13 dark:text-white">فروشگاه اثار هنری</h1>
-      <div>
-        <FontAwesomeIcon icon={faCoffee} className="dark:text-white"/>
-      </div>
-    </div>
+    <>
+      <Header />
+      {routes}
+    </>
   );
 }
 
