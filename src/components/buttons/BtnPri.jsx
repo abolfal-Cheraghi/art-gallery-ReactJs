@@ -6,7 +6,7 @@ export default function BtnPri(props) {
     <div>
       <Link
         to={props.link}
-        className={`btn-primary hover:bg-accent w-fit px-6 flex items-center justify-center gap-2 ${props.className} `}
+        className={`btn-primary w-fit px-6 flex items-center justify-center gap-2 ${props.className} `}
       >
         <span>{props.text}</span>
         {props.children}

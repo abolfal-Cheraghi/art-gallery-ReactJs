@@ -87,10 +87,7 @@
       "name_EN": "Chalk pastel, 48 colors, Koh Noor, model, wooden box, code 8596",
       "img": "https://halochin.ir/art-gallery/wp-content/uploads/2023/11/product-7.jpg",
       "price": "495000",
-      "discount": {
-        "percent": null,
-        "a_price": null
-      },
+      "discount": null,
       "short_desc": [
         "نوع قلم مو :گرد",
         "جنس دسته :پلاستیک",
@@ -115,10 +112,7 @@
         "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/product-2-min-1.jpg"
       ],
       "price": "799000",
-      "discount": {
-        "percent": 6,
-        "a_price": null
-      },
+      "discount": "6",
       "short_desc": [
         "نوع قلم مو :گرد",
         "جنس دسته :پلاستیک",
@@ -139,10 +133,7 @@
       "img": "https://halochin.ir/art-gallery/wp-content/uploads/2023/11/product-5.jpg",
       "gallery": null,
       "price": "109000",
-      "discount": {
-        "percent": null,
-        "a_price": null
-      },
+      "discount": null,
       "short_desc": [
         "نوع قلم مو :گرد",
         "جنس دسته :پلاستیک",
@@ -163,10 +154,7 @@
       "img": "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/product-4-min.jpg",
       "gallery": null,
       "price": "229000",
-      "discount": {
-        "percent": 8,
-        "a_price": null
-      },
+      "discount": "8",
       "short_desc": [
         "نوع قلم مو :گرد",
         "جنس دسته :پلاستیک",
@@ -187,10 +175,7 @@
       "img": "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/product-3-min.jpg",
       "gallery": null,
       "price": "137000",
-      "discount": {
-        "percent": null,
-        "a_price": null
-      },
+      "discount": null,
       "short_desc": [
         "نوع قلم مو :گرد",
         "جنس دسته :پلاستیک",
@@ -211,10 +196,7 @@
       "img": "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/product-2-min-1.jpg",
       "gallery": null,
       "price": "599000",
-      "discount": {
-        "percent": 6,
-        "a_price": null
-      },
+      "discount": "6",
       "short_desc": [
         "نوع قلم مو :گرد",
         "جنس دسته :پلاستیک",
@@ -234,11 +216,8 @@
       "name_EN": "Round brush, code 717-2, set of 6 pieces",
       "img": "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/product-1.jpg",
       "gallery": null,
-      "price": null,
-      "discount": {
-        "percent": null,
-        "a_price": "123000"
-      },
+      "price": "230000",
+      "discount": null,
       "short_desc": [
         "نوع قلم مو :گرد",
         "جنس دسته :پلاستیک",
@@ -255,5 +234,105 @@
   "comments": [{ "id": 1 }],
   "articles": [{ "id": 1 }],
   "category_article": [{ "id": 1 }],
-  "users": [{ "id": 1 }]
+  "users": [{ "id": 1 }],
+  "ourArtists": [
+    {
+      "id": 1,
+      "fullName": "احسان علیخانی",
+      "img": "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/GettyImages-667156305-59befb3daf5d3a00102437f8-min-1024x683.jpg",
+      "about": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله...",
+      "stras": "2"
+    },
+    {
+      "id": 2,
+      "fullName": "ملیکا رحمانی",
+      "img": "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/Hindi-Art-for-Busniness-Leaders-min-1024x576.jpg",
+      "about": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله...",
+      "stras": "4"
+    },
+    {
+      "id": 3,
+      "fullName": "مصطفی قانعی",
+      "img": "https://halochin.ir/art-gallery/wp-content/uploads/2023/11/maxresdefault-1024x576.jpg",
+      "about": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله...",
+      "stras": "4"
+    },
+    {
+      "id": 4,
+      "fullName": "علی میرزایی",
+      "img": "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/2249442-min-1024x682.jpg",
+      "about": "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله...",
+      "stras": "3"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "titlePr": "تابلو نقاشی رنگی طرح مجسمه",
+      "descPr": "تابلو نقاشی رنگی طرح مجسمه لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.",
+      "imgPr": "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/image-99.jpg",
+      "galleryPr": [
+        "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/image-99.jpg",
+        "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/ai-generated-concept-human-1-min.jpg",
+        "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/pompidou-museum-malaga-1-min.jpg",
+        "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/botanical-leaves-1-min.jpg"
+      ],
+      "overview": {
+        "size": "90*450",
+        "DesignType": "آبرنگ",
+        "FormatType": "چوبی"
+      }
+    },
+    {
+      "id": 2,
+      "titlePr": "نقاشی آبرنگ طرح گل کد 038",
+      "descPr": "تابلو نقاشی رنگی طرح مجسمه لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.",
+      "imgPr": "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/botanical-leaves-1-min.jpg",
+      "galleryPr": [
+        "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/botanical-leaves-1-min.jpg ",
+        "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/ai-generated-concept-human-1-min.jpg",
+        "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/pompidou-museum-malaga-1-min.jpg",
+        "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/image-99.jpg"
+      ],
+      "overview": {
+        "size": "300*300",
+        "DesignType": "سیاه قلم",
+        "FormatType": "چوبی"
+      }
+    },
+    {
+      "id": 3,
+      "titlePr": "تابلو نقاشی طرح مکعب کد 654",
+      "descPr": "تابلو نقاشی رنگی طرح مجسمه لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.",
+      "imgPr": "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/pompidou-museum-malaga-1-min.jpg",
+      "galleryPr": [
+        "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/image-99.jpg",
+        "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/ai-generated-concept-human-1-min.jpg",
+        "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/pompidou-museum-malaga-1-min.jpg",
+        "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/botanical-leaves-1-min.jpg"
+      ],
+      "overview": {
+        "size": "120*120",
+        "DesignType": "رنگ روغن",
+        "FormatType": "چوبی"
+      }
+    },
+    {
+      "id": 4,
+      "titlePr": "تابلو ویترای طرح مدرن کد 027",
+      "descPr": "تابلو نقاشی رنگی طرح مجسمه لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد. در این صورت می توان امید داشت که تمام و دشواری موجود در ارائه راهکارها و شرایط سخت تایپ به پایان رسد وزمان مورد نیاز شامل حروفچینی دستاوردهای اصلی و جوابگوی سوالات پیوسته اهل دنیای موجود طراحی اساسا مورد استفاده قرار گیرد.",
+      "imgPr": "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/image-99.jpg",
+      "galleryPr": [
+        "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/image-99.jpg",
+        "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/ai-generated-concept-human-1-min.jpg",
+        "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/pompidou-museum-malaga-1-min.jpg",
+        "https://halochin.ir/art-gallery/wp-content/uploads/2023/10/botanical-leaves-1-min.jpg"
+      ],
+      "overview": {
+        "size": "950*600",
+        "DesignType": "رنگ گواش",
+        "FormatType": "چوبی"
+      }
+    }
+  ]
 }

@@ -12,6 +12,7 @@ import { FaMapLocationDot } from "react-icons/fa6";
 import { TbCheckbox } from "react-icons/tb";
 import { GrUserManager } from "react-icons/gr";
 import { BsWrenchAdjustableCircleFill } from "react-icons/bs";
+import { FaEye } from "react-icons/fa6";
 // images
 import imgGroup1 from "/Group-70-min.png";
 import imgGroup2 from "/studio-with-props-painting.jpg";
@@ -19,7 +20,13 @@ import imgGroup3 from "/Rectangle-office.png";
 import imgGroup4 from "/Group-70-min-1.png";
 
 import BtnAcc from "../components/buttons/BtnAcc";
+import ProductList from "../components/product list/ProductList";
+import { useGlobalData } from "../hooks/useGlobalData";
+import SliderOurArtists from "../components/sections/SliderOurArtists";
+import SliderOurProjects from "../components/sections/SliderOurProjects";
+
 export default function Home() {
+  const { products } = useGlobalData();
   return (
     <>
       {/* section hero */}
@@ -56,16 +63,20 @@ export default function Home() {
           <div className="bottom-hero">
             <div className="container">
               <Swiper
-                spaceBetween={80}
+                slidesPerView={2}
+                spaceBetween={30}
                 breakpoints={{
                   1200: {
                     slidesPerView: 4,
+                    spaceBetween: 50,
                   },
                   800: {
                     slidesPerView: 3,
+                    spaceBetween: 80,
                   },
                   600: {
                     slidesPerView: 2,
+                    spaceBetween: 70,
                   },
                 }}
                 autoplay={{
@@ -80,21 +91,21 @@ export default function Home() {
                   <img
                     src="https://halochin.ir/art-gallery/wp-content/uploads/2023/10/gallery1.png"
                     alt="art board"
-                    className="img-fluid"
+                    className="h-full w-full object-cover object-center"
                   />
                 </SwiperSlide>
                 <SwiperSlide className="flex items-center justify-center">
                   <img
                     src="https://halochin.ir/art-gallery/wp-content/uploads/2023/10/monalisa-1-1-min.png"
                     alt="art board"
-                    className="img-fluid"
+                    className="h-full w-full object-cover object-center"
                   />
                 </SwiperSlide>
                 <SwiperSlide className="flex items-center justify-center">
                   <img
                     src="https://halochin.ir/art-gallery/wp-content/uploads/2023/10/night-1-1-min.png"
                     alt="art board"
-                    className="img-fluid"
+                    className="h-full w-full object-cover object-center"
                   />
                 </SwiperSlide>
                 <SwiperSlide className="flex items-center justify-center">
@@ -111,7 +122,7 @@ export default function Home() {
       </section>
 
       {/* section 2  */}
-      <section className="my-20 md:my-32">
+      <section className="my-20 md:my-24">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
             {/* right */}
@@ -160,19 +171,59 @@ export default function Home() {
       </section>
 
       {/* section Some of the products in our store! */}
-      <section className="some-of-product my-20">
+      <section className="some-of-product">
         <div className="container">
           {/* title this section */}
           <h2 className="title-box">
             برخی از
-            <span className="text-g-primary font-[inherit]">محصولات</span>
+            <span className="text-g-primary font-[inherit]">محصولات </span>
             فروشگاه ما !
           </h2>
+
+          {/* wrapper products */}
+          <Swiper
+            slidesPerView={1}
+            spaceBetween={50}
+            breakpoints={{
+              1200: {
+                slidesPerView: 4,
+                // spaceBetween: 50,
+              },
+              800: {
+                slidesPerView: 3,
+                // spaceBetween: 80,
+              },
+              600: {
+                slidesPerView: 2,
+                // spaceBetween: 70,
+              },
+            }}
+            autoplay={{
+              delay: 2500,
+              disableOnInteraction: false,
+            }}
+            className="mySwiper con-slider-product  mt-5"
+          >
+            {products.map((product) => (
+              <SwiperSlide key={product.id}>
+                <ProductList {...product} all={product} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <div className="flex justify-center mt-8">
+            <BtnAcc
+              text="مشاهده همه"
+              link="/shop"
+              className="py-3 text-md hover:bg-g-primary"
+            >
+              <FaEye size="16px" />
+            </BtnAcc>
+          </div>
         </div>
       </section>
 
       {/* section 4 */}
-      <section className="my-20 md:my-32 relative ">
+      <section className="my-20 md:my-24 relative ">
         {/* BOXES FLOWER FLOAT  */}
         <div className="hidden lg:block absolute top-48 left-[35%] w-32 h-32 md:w-44 md:h-44 opacity-80">
           <img src="/shape.png" alt="shapes" />
@@ -257,6 +308,9 @@ export default function Home() {
             </span>{" "}
             بشناسید !
           </h2>
+
+          {/* component slider our artists */}
+          <SliderOurArtists />
         </div>
       </section>
 
@@ -306,12 +360,15 @@ export default function Home() {
       </section>
 
       {/* section some of our projects */}
-      <section className="some-of-project my-32">
+      <section className="some-of-project my-24">
         <div className="container">
           <h2 className="title-box">
             <span className="text-g-primary font-[inherit]">نمونه کارهای</span>{" "}
             ما !
           </h2>
+
+          {/* slider some of our projects */}
+          <SliderOurProjects />
         </div>
       </section>
 
@@ -354,7 +411,7 @@ export default function Home() {
                     link="/about"
                     className="py-3 font-rokh-bold hover:bg-accent"
                   >
-                    <GrUserManager  size="16px"/>
+                    <GrUserManager size="16px" />
                   </BtnPri>
                 </div>
               </div>

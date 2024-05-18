@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { memo, useCallback, useEffect, useState } from "react";
 import { IoIosSearch } from "react-icons/io";
 import { TiArrowSortedDown } from "react-icons/ti";
 import { useGlobalData } from "../../hooks/useGlobalData";
-export default function SearchBox() {
+function SearchBox() {
   const [selectSearch, setSelectSearch] = useState("دسته بندی ها");
   const [toggle_selectBox, setToggle_selectBox] = useState(false);
   //get data categories from context
   const { categoryProducts } = useGlobalData();
+
+  const toggleSelectBox = ()=>{
+    setToggle_selectBox(!toggle_selectBox);
+  }
+
+  
   return (
     <form action="" className="lg:min-w-[500px]">
       <div className="container-search-box w-full">
@@ -27,9 +33,7 @@ export default function SearchBox() {
           <div className="w-5/12 sm:w-2/12 md:w-4/12  flex flex-col relative">
             <button
               type="button"
-              onClick={() => {
-                setToggle_selectBox(!toggle_selectBox);
-              }}
+              onClick={toggleSelectBox}
               className="btn-secondary flex justify-between min-w-32  px-4 py-2 text-s-10 md:text-xs"
             >
               <span>{selectSearch}</span>
@@ -54,7 +58,7 @@ export default function SearchBox() {
                       }`}
                       onClick={(e) => {
                         setSelectSearch(item.category);
-                        setToggle_selectBox(false)
+                        setToggle_selectBox(false);
                       }}
                     >
                       {item.category}
@@ -69,3 +73,5 @@ export default function SearchBox() {
     </form>
   );
 }
+
+export default memo(SearchBox);
