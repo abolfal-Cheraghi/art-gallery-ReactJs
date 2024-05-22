@@ -4,7 +4,7 @@ import { HiShoppingBag } from "react-icons/hi2";
 import "./ProductList.css";
 import discountPrice from "../../functions/discountPrice";
 import { useGlobalData } from "../../hooks/useGlobalData";
-
+import { ToastContainer } from "react-toastify";
 export default function ProductList(props) {
   const { perecentageValue, finalValue } = discountPrice(
     props.price,
@@ -60,7 +60,7 @@ export default function ProductList(props) {
                   className="btn-primary py-1 px-3 text-xs rounded-lg font-yekanbakh"
                   onClick={() => {
                     addToCart(props.all);
-                    
+              
                   }}
                 >
                   خرید <HiShoppingBag className="fill-white" />

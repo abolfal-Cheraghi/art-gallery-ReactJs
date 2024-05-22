@@ -1,7 +1,5 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css/free-mode";
-import { FreeMode, Autoplay } from "swiper/modules";
 import { useGlobalData } from "../../hooks/useGlobalData";
 import ArtistCard from "../artist list/ArtistCard";
 import { TfiRuler } from "react-icons/tfi";

@@ -8,26 +8,33 @@ import React, {
 } from "react";
 import discountPrice from "../functions/discountPrice";
 import { ToastContainer, toast } from "react-toastify";
-
 export const globalContext = createContext(null);
 
 function GlobalProvider({ children }) {
+  // state menu navbar
   const [menuNavbar, setMenuNavber] = useState([]);
+  // state data categories of products
   const [categoryProducts, setCategoryProducts] = useState([]);
+  // state toggle side bar navbar & cart
   const [showsSidebar, setShowSidebar] = useState(false);
   const [showsSidebarCart, setShowSidebarCart] = useState(false);
+  // state data products & discounts
   const [products, setProducts] = useState([]);
+  const [productsDiscount, setProductsDiscounts] = useState([]);
+  // state data our artist
   const [ourArtists, setOurArtists] = useState([]);
+  // state data our project
   const [ourProjects, setOurProjects] = useState([]);
+  // state list our projects image
+  const [ourProjects_Img, setOurProjects_Img] = useState([]);
+  // pending all state global
   const [isPending, setIsPending] = useState(true);
-  const [cart, setCart] = useState([]);
 
+  // list cart
+  const [cart, setCart] = useState([]);
   const [totalCart, setTotalCart] = useState(0);
 
-  /* functions 
-  add to cart 
-  & remove to cart 
-  & remove All */
+  // when is changed list carts
   useEffect(() => {
     if (cart.length !== 0) {
       const arrayPrice = cart.map((i) => i.finalPrice * i.quantity);
@@ -35,7 +42,10 @@ function GlobalProvider({ children }) {
       setTotalCart(total);
     }
   }, [cart]);
-
+  /* functions 
+  add to cart 
+  & remove to cart 
+  & remove All */
   const addToCart = (newObject) => {
     const existingItem = cart.find((item) => item.id === newObject.id);
 
@@ -48,17 +58,6 @@ function GlobalProvider({ children }) {
         ...prevItems,
         { ...newObject, quantity: 1, finalPrice: finalValue },
       ]);
-      toast.success("بسلبل", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
-        theme: "light",
-        transition: Bounce,
-      });
     } else {
       const updatedCart = cart.map((item) =>
         item.id === newObject.id
@@ -67,6 +66,17 @@ function GlobalProvider({ children }) {
       );
       setCart(updatedCart);
     }
+
+    toast.success("محصول به سبد خرید اضافه شد.", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   };
   function removeTo_Cart(id) {
     setCart((prevState) => {
@@ -109,9 +119,12 @@ function GlobalProvider({ children }) {
       });
     });
 
-    // get all info products
+    // get all info products & Discounts
     axios.get("http://localhost:5000/products").then((res) => {
       setProducts(res.data);
+      setProductsDiscounts(() => {
+        return res.data.filter((product) => product.discount !== null);
+      });
       setIsPending((prev) => {
         return prev ? prev : false;
       });
@@ -127,6 +140,11 @@ function GlobalProvider({ children }) {
     // get all info our projects
     axios.get("http://localhost:5000/projects").then((res) => {
       setOurProjects(res.data);
+      res.data.map((project) => {
+        setOurProjects_Img((prev) => {
+          return [...prev, project.imgPr];
+        });
+      });
       setIsPending((prev) => {
         return prev ? prev : false;
       });
@@ -147,8 +165,9 @@ function GlobalProvider({ children }) {
         // side bar b=navbar
         showsSidebar,
         setShowSidebar,
-        // products
+        // products & discount
         products,
+        productsDiscount,
         // sidebar cart
         showsSidebarCart,
         setShowSidebarCart,
@@ -164,14 +183,17 @@ function GlobalProvider({ children }) {
 
         // data info our artist
         ourArtists,
-        // data info our projects
-        ourProjects ,
+        // data info our projects and list img
+        ourProjects,
+        ourProjects_Img,
         // is pending datas
         isPending,
       }}
     >
       {children}
-      <ToastContainer />
+
+      {/* toastify |When a product is added to the cart  */}
+      <ToastContainer rtl />
     </globalContext.Provider>
   );
 }

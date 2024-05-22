@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
+const flowbite = require("flowbite-react/tailwind");
 module.exports = {
   darkMode: "class",
-  content: ["./src/**/*.{js,jsx,ts,tsx}"],
+  content: ["./src/**/*.{js,jsx,ts,tsx}", flowbite.content()],
   theme: {
     extend: {
       container: {
@@ -46,9 +47,8 @@ module.exports = {
         "shape-flower-right": "url('/shapeR.png')",
         "shape-flower-left": "url('/shapeL.png')",
         "shape-flower": "url('/shape.png')",
-
       },
     },
   },
-  plugins: [],
+  plugins: [flowbite.plugin()],
 };

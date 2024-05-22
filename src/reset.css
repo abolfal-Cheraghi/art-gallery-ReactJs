@@ -5,3 +5,6 @@ input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
   -webkit-appearance: none;
 }
+input[type="search"]:focus {
+  box-shadow: none;
+}

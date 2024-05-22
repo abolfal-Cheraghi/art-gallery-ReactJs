@@ -8,11 +8,10 @@ function SearchBox() {
   //get data categories from context
   const { categoryProducts } = useGlobalData();
 
-  const toggleSelectBox = ()=>{
+  const toggleSelectBox = () => {
     setToggle_selectBox(!toggle_selectBox);
-  }
+  };
 
-  
   return (
     <form action="" className="lg:min-w-[500px]">
       <div className="container-search-box w-full">
@@ -24,7 +23,7 @@ function SearchBox() {
               type="search"
               id=""
               role="search"
-              className="shadow-none outline-none bg-inherit text-xs"
+              className="shadow-none w-full outline-none bg-inherit text-xs border-none"
               placeholder="جستجو کنید ..."
             />
           </div>

@@ -94,7 +94,7 @@ body {
   }
   .paragraph {
     @apply text-gray text-s-13 md:text-sm font-yekanbakh;
-    line-height: 1.625rem ;
+    line-height: 1.625rem;
   }
   .title-cart-18 {
     @apply text-accent text-lg font-rokh;
@@ -126,6 +126,11 @@ body {
   .close-sidebar {
     @apply duration-700;
     flex-basis: 0;
+  }
+
+  /* borders */
+  .border-box {
+    border: 1px solid #e3e3e3;
   }
 }
 
@@ -161,6 +166,11 @@ body {
   all: unset;
 }
 
+/* swiper */
 .con-slider-product {
   padding-left: 30px !important;
+}
+
+.swipe-slider-discount {
+  padding: 0 20px 0 40px !important;
 }

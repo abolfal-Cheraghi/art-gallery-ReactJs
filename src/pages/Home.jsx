@@ -24,6 +24,8 @@ import ProductList from "../components/product list/ProductList";
 import { useGlobalData } from "../hooks/useGlobalData";
 import SliderOurArtists from "../components/sections/SliderOurArtists";
 import SliderOurProjects from "../components/sections/SliderOurProjects";
+import SLiderOurProjectImg from "../components/sections/SLiderOurProjectImg";
+import SliderDiscounts from "../components/sections/SliderDiscounts";
 
 export default function Home() {
   const { products } = useGlobalData();
@@ -294,11 +296,15 @@ export default function Home() {
           </h2>
         </div>
         {/* wrapper our effects */}
-        <div className="mt-6 h-96 bg-g-primary relative before:content-[''] before:bg-[url('/pattern-1.png')] before:w-full before:h-full before:absolute before:top-0"></div>
+        <div className="mt-6 py-8  bg-g-primary felx items-center justify-center relative before:content-[''] before:bg-[url('/pattern-1.png')] before:w-full before:h-full before:absolute before:top-0">
+          <div className="container">
+            <SLiderOurProjectImg />
+          </div>
+        </div>
       </section>
 
       {/* section list our members */}
-      <section className="my-32">
+      <section className="my-14 md:my-32">
         <div className="container">
           <h2 className="title-box">
             هنرمندهای
@@ -315,7 +321,11 @@ export default function Home() {
       </section>
 
       {/* section some of our Discounts */}
-      <section className="discount"></section>
+      <section className="discount my-24">
+        <div className="container">
+          <SliderDiscounts />
+        </div>
+      </section>
 
       {/* section 8 */}
       <section>
@@ -360,7 +370,7 @@ export default function Home() {
       </section>
 
       {/* section some of our projects */}
-      <section className="some-of-project my-24">
+      <section className="some-of-project my-14 md:my-24">
         <div className="container">
           <h2 className="title-box">
             <span className="text-g-primary font-[inherit]">نمونه کارهای</span>{" "}
