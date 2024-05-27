@@ -18,7 +18,7 @@ export default function Portfolios() {
           {ourProjects.map((pr) => (
             <ProjectCard key={pr.id} {...pr} />
           ))}
-        </div>``
+        </div>
       </div>
     </section>
   );

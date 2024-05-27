@@ -93,6 +93,7 @@ body {
     @apply text-accent font-rokh-bold text-[20px] lg:text-[23px];
   }
   .paragraph {
+
     @apply text-gray text-s-13 md:text-sm font-yekanbakh;
     line-height: 1.625rem;
   }
@@ -170,7 +171,11 @@ body {
 .con-slider-product {
   padding-left: 30px !important;
 }
-
+.flexible-center{
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
 .swipe-slider-discount {
   padding: 0 20px 0 40px !important;
 }

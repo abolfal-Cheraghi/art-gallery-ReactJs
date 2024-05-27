@@ -28,116 +28,83 @@ export default function Shop() {
     query: null,
     params: null,
   });
+  const [filterByOrder, setFilterByOrder] = useState("");
+  const [disabled_btnFilter, setDisabled_btnFilter] = useState(false);
+
+  // function fetch data product
+
+  const fetchProduct = async (url) => {
+    try {
+      const response = await fetch(`http://localhost:5000/products${url}`);
+      const data = await response.json();
+      setDataProducts(data.data);
+      setPageCount(data.pages);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   useEffect(() => {
+    // Each time the route changes, the filter state is sorted by = with ""
+    setFilterByOrder("");
+    // get query params and params and save to state
     set_queries_params(() => {
       const update = { query: searchURL.get("brand"), params: params["*"] };
       return update;
     });
+
+    // get data products
     startTranstion(() => {
-      axios
-        .get("http://localhost:5000/products/?_page=1&_per_page=6")
-        .then((res) => {
-          setDataProducts(res.data.data);
-          setPageCount(res.data.pages);
-        });
+      fetchProduct("?_page=1&_per_page=6");
       if (params["*"] === "" && searchURL["size"] === 0) {
         setDataProducts(DataProducts);
       } else {
         if (params["*"] !== "" && searchURL["size"] === 0) {
-          axios
-            .get(
-              `http://localhost:5000/products/?category_Value=${params["*"]}&_page=1&_per_page=6`
-            )
-            .then((res) => {
-              setDataProducts(res.data.data);
-              setPageCount(res.data.pages);
-            });
+          fetchProduct(`?category_Value=${params["*"]}&_page=1&_per_page=6`);
         } else if (params["*"] === "" && searchURL["size"] !== 0) {
-          axios
-            .get(
-              `http://localhost:5000/products/?${
-                searchURL.get("brand") !== null &&
-                "brand=" + searchURL.get("brand")
-              }&_page=1&_per_page=6`
-            )
-            .then((res) => {
-              setDataProducts(res.data.data);
-              setPageCount(res.data.pages);
-            });
+          fetchProduct(
+            `?${
+              searchURL.get("brand") !== null &&
+              "brand=" + searchURL.get("brand")
+            }&_page=1&_per_page=6`
+          );
         } else if (params["*"] !== "" && searchURL["size"] !== 0) {
-          axios
-            .get(
-              `http://localhost:5000/products/?category_Value=${params["*"]}&${
-                searchURL.get("brand") !== null &&
-                "brand=" + searchURL.get("brand")
-              }&_page=1&_per_page=6`
-            )
-            .then((res) => {
-              setDataProducts(res.data.data);
-              setPageCount(res.data.pages);
-            });
+          fetchProduct(
+            `?category_Value=${params["*"]}&${
+              searchURL.get("brand") !== null &&
+              "brand=" + searchURL.get("brand")
+            }&_page=1&_per_page=6`
+          );
         }
       }
     });
-
-    return () => {
-      return;
-    };
   }, [params]);
 
   // on chnage handler paginate
   const onChangePage = (e) => {
+    setFilterByOrder("");
     startTranstion(() => {
       if (params["*"] === "" && searchURL["size"] === 0) {
-        axios
-          .get(
-            `http://localhost:5000/products/?_page=${
-              e.selected + 1
-            }&_per_page=6`
-          )
-          .then((res) => {
-            setDataProducts(res.data.data);
-            setPageCount(res.data.pages);
-          });
+        fetchProduct(`?_page=${e.selected + 1}&_per_page=6`);
       } else {
         if (params["*"] !== "" && searchURL["size"] === 0) {
-          axios
-            .get(
-              `http://localhost:5000/products/?category_Value=${
-                params["*"]
-              }&_page=${e.selected + 1}&_per_page=6`
-            )
-            .then((res) => {
-              setDataProducts(res.data.data);
-              setPageCount(res.data.pages);
-            });
+          fetchProduct(
+            `?category_Value=${params["*"]}&_page=${e.selected + 1}&_per_page=6`
+          );
         } else if (params["*"] === "" && searchURL["size"] !== 0) {
-          axios
-            .get(
-              `http://localhost:5000/products/?${
-                searchURL.get("brand") !== null &&
-                "brand=" + searchURL.get("brand")
-              }&_page=${e.selected + 1}&_per_page=6`
-            )
-            .then((res) => {
-              setDataProducts(res.data.data);
-
-              setPageCount(res.data.pages);
-            });
+          fetchProduct(
+            `?${
+              searchURL.get("brand") !== null &&
+              "brand=" + searchURL.get("brand")
+            }&_page=${e.selected + 1}&_per_page=6`
+          );
         } else if (params["*"] !== "" && searchURL["size"] !== 0) {
-          axios
-            .get(
-              `http://localhost:5000/products/?category_Value=${params["*"]}&${
-                searchURL.get("brand") !== null &&
-                "brand=" + searchURL.get("brand")
-              }&_page=${e.selected + 1}&_per_page=6`
-            )
-            .then((res) => {
-              setDataProducts(res.data.data);
-
-              setPageCount(res.data.pages);
-            });
+          fetchProduct(
+            `?category_Value=${params["*"]}&${
+              searchURL.get("brand") !== null &&
+              "brand=" + searchURL.get("brand")
+            }&_page=${e.selected + 1}&_per_page=6`
+          );
         }
       }
     });
@@ -148,24 +115,71 @@ export default function Shop() {
     set_queries_params((prev) => {
       return { ...prev, params: e.target.value };
     });
+    setDisabled_btnFilter(false);
   });
   const changeSelect_brand = useCallback((e) => {
     set_queries_params((prev) => {
       return { ...prev, query: e.target.value };
     });
+    setDisabled_btnFilter(false);
   });
 
   // btn ApplyFilter_Handler and replace url
-  const ApplyFilter_Handler = () => {
-    // location.replace(
-    //   `/shop/${queries_params.params}?brnad=${queries_params.query}`
-    // );
-    navigate(
-      `/shop/${queries_params.params}${
-        queries_params.query !== null ? "?brand=" + queries_params.query : ""
-      }`
-    );
+  const ApplyFilter_Handler = (e) => {
+    if (disabled_btnFilter) {
+      removeEventListener(e.target);
+    } else {
+      navigate(
+        `/shop/${queries_params.params}${
+          queries_params.query !== null ? "?brand=" + queries_params.query : ""
+        }`
+      );
+      setDisabled_btnFilter(true);
+    }
   };
+
+  // select box change Handler order
+  const changeOrder_Handler = (e) => {
+    setFilterByOrder(e.target.value);
+    console.log(e.target.value);
+  };
+
+  // when change is state filterByOrder
+  useEffect(() => {
+    startTranstion(() => {
+      if (filterByOrder === "cheapest") {
+        setDataProducts((prevData) => {
+          const orderBy_cheapest = prevData.sort(
+            (a, b) => parseInt(a.price) - b.price
+          );
+          return orderBy_cheapest;
+        });
+      } else if (filterByOrder === "most-expensive") {
+        setDataProducts((prevData) => {
+          const orderBy_MostExpensive = prevData.sort(
+            (a, b) => parseInt(b.price) - parseInt(a.price)
+          );
+          return orderBy_MostExpensive;
+        });
+      } else if (filterByOrder === "oldest") {
+        setDataProducts((prevData) => {
+          const orderBy_oldest = prevData.sort(
+            (a, b) => parseInt(a.id) - parseInt(b.id)
+          );
+          return orderBy_oldest;
+        });
+      } else if (filterByOrder === "newest") {
+        setDataProducts((prevData) => {
+          const orderBy_oldest = prevData.sort(
+            (a, b) => parseInt(b.id) - parseInt(a.id)
+          );
+          return orderBy_oldest;
+        });
+      } else {
+      }
+    });
+  }, [filterByOrder]);
+
   return (
     <>
       <section className="shop-page">
@@ -175,7 +189,12 @@ export default function Shop() {
             {/* sidebar filter*/}
             <div className="right">
               <contextShop.Provider
-                value={{ queries_params, set_queries_params }}
+                value={{
+                  queries_params,
+                  set_queries_params,
+                  disabled_btnFilter,
+                  setDisabled_btnFilter,
+                }}
               >
                 <div className="sticky top-8">
                   <FilterBox
@@ -192,7 +211,12 @@ export default function Shop() {
                 <h2 className="font-rokh-bold text-[#444444] text-lg md:text-xl">
                   فروشگاه
                 </h2>
-                <SelectBox label="مرتب سازی بر اساس..." width="250px">
+                <SelectBox
+                  label="مرتب سازی بر اساس..."
+                  width="250px"
+                  labelSelcted={filterByOrder === "" ? true : false}
+                  onchange={changeOrder_Handler}
+                >
                   <option value="cheapest">
                     بر اساس قیمت از ارزانترین به گرانترین
                   </option>

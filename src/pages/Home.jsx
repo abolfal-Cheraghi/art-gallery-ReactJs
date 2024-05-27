@@ -261,7 +261,6 @@ export default function Home() {
                   رایانه ای علی الخصوص طراحان خلاقی، و فرهنگ پیشرو در زبان فارسی
                   ایجاد کرد، در این صورت می توان امید داشت.
                 </p>
-
                 {/* buttons group */}
                 <div className="flex">
                   <BtnAcc

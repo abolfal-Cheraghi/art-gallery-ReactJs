@@ -29,6 +29,8 @@ function GlobalProvider({ children }) {
   const [ourProjects_Img, setOurProjects_Img] = useState([]);
   // pending all state global
   const [isPending, setIsPending] = useState(true);
+  // list favorate products
+  const [ListFavorate_Product, setListFavorate_Product] = useState([]);
 
   // list cart
   const [cart, setCart] = useState([]);
@@ -103,6 +105,71 @@ function GlobalProvider({ children }) {
     }
   }
 
+  /*functions
+  add to list favorate , 
+  remove to List ,
+  is to list
+  */
+
+  // Add to list favorate function
+  const AddToList_favorate = (product) => {
+    setListFavorate_Product((prevList) => {
+      if (!prevList.some((i) => i.id === product.id)) {
+        return [...prevList, product];
+      } else {
+        return prevList;
+      }
+    });
+    toast.success("محصول به لیست علاقه مندی ها اضافه شد.", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+  // Remove to list favorate function
+  const RemoveToList_favorate = (id_product) => {
+    setListFavorate_Product((prevList) => {
+      return prevList.filter((item) => item.id !== id_product);
+    });
+    toast.success("محصول از لیست علاقه مندی ها حذف شد.", {
+      position: "top-right",
+      autoClose: 1000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+
+  // is Save to list ? function
+  const isSaveTo_favorate = (id_product) => {
+    if (ListFavorate_Product.some((i) => i.id === id_product)) {
+      return true;
+    }
+    return false;
+  };
+
+  // useEfeect when update is list favorate
+  useEffect(() => {
+    // get list favorate | localstorage
+    setListFavorate_Product(() => {
+      const listF = localStorage.getItem("listFavorate");
+      return JSON.parse(listF);
+    });
+
+    localStorage.setItem("listFavorate", JSON.stringify(ListFavorate_Product));
+  }, [ListFavorate_Product]);
+
+  // useEffect update list favorate
+  useEffect(() => {}, [ListFavorate_Product]);
   // useEfect  un mount web
   const getDataCallback = useCallback(() => {
     axios.get("http://localhost:5000/menu").then((res) => {
@@ -188,6 +255,11 @@ function GlobalProvider({ children }) {
         ourProjects_Img,
         // is pending datas
         isPending,
+
+        // list favorate function
+        isSaveTo_favorate,
+        RemoveToList_favorate,
+        AddToList_favorate,
       }}
     >
       {children}

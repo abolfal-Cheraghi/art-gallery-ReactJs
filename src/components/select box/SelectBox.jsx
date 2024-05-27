@@ -1,9 +1,16 @@
 import React from "react";
-import { Description, Field, Label, Select } from "@headlessui/react";
+import { Field, Select } from "@headlessui/react";
 import clsx from "clsx";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
-export default function SelectBox({ onchange, bg, label, children , width , labelSelcted}) {
+export default function SelectBox({
+  onchange,
+  bg,
+  label,
+  children,
+  width,
+  labelSelcted,
+}) {
   return (
     <>
       <div className={`w-[${width}] max-w-md`}>

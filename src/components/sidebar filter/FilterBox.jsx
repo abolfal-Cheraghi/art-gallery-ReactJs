@@ -1,14 +1,33 @@
-import React, { useContext } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import SelectBox from "../select box/SelectBox";
 import { useGlobalData } from "../../hooks/useGlobalData";
 import { brand_products } from "../../data/Brands";
 import { contextShop } from "../../pages/shop/Shop";
 import { useNavigate } from "react-router-dom";
+// flowbit
+import { Button, Tooltip } from "flowbite-react";
 export default function FilterBox(props) {
   const { categoryProducts } = useGlobalData();
-  const { queries_params, set_queries_params } = useContext(contextShop);
-
+  const { queries_params, set_queries_params, disabled_btnFilter } =
+    useContext(contextShop);
+  const [showBtn_removeFilter, setShowBtn_remove_filter] = useState(false);
   const navigate = useNavigate();
+  useEffect(() => {
+    if (queries_params["query"] !== null && queries_params["brand"] !== null) {
+      setShowBtn_remove_filter(true);
+    } else {
+      setShowBtn_remove_filter(false);
+    }
+  }, [queries_params]);
+
+  // event onclick btn remove all filter
+  const btnRemoveAll_filter = useCallback(() => {
+    set_queries_params({ query: null, brand: null });
+    navigate("/shop");
+  });
+
+  
+
   return (
     <>
       <div className="container-filter-box">
@@ -87,25 +106,25 @@ export default function FilterBox(props) {
             {/* btn filter to ... */}
             <button
               type="button"
-              className="bg-g-secondary text-white text-sm py-2.5 text-center rounded-lg duration-500  hover:text-g-secondary hover:bg-white hover:outline hover:outline-1 "
+              className={`bg-g-secondary relative text-white text-sm py-2.5 text-center rounded-lg duration-500  ${
+                disabled_btnFilter
+                  ? "opacity-60 before:content-[] before:absolute before:h-[20px] before:w-fit before:py-1.5 before:px-3 before:bg-red-500 before:z-10 before:left-0"
+                  : " hover:text-g-secondary hover:bg-white hover:outline hover:outline-1"
+              }`}
               onClick={props.Apply_filter}
             >
               اعمال فیلتر ها
             </button>
-            {queries_params["query"] !== null &&
-            queries_params["brand"] !== null ? (
-              <button
-                type="button"
-                className="text-sm py-2.5 text-center rounded-lg duration-500  text-g-secondary bg-white outline outline-1 hover:bg-g-secondary hover:text-white "
-                onClick={() => {
-                  set_queries_params({ query: null, brand: null });
-                  navigate("/shop");
-                }}
-              >
-                حذف فیلتر ها
-              </button>
-            ) : (
-              null
+            {showBtn_removeFilter && (
+              <Tooltip content="Tooltip content" className="bg-g-primary px-4">
+                <button
+                  type="button"
+                  className="w-full text-sm py-2.5 text-center rounded-lg duration-500  text-g-secondary bg-white outline outline-1 hover:bg-g-secondary hover:text-white"
+                  onClick={btnRemoveAll_filter}
+                >
+                  حذف فیلتر ها
+                </button>
+              </Tooltip>
             )}
           </div>
         </div>

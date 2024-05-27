@@ -41,10 +41,13 @@ export default function ProductList(props) {
             <div className="flex justify-between items-end">
               <div className="flex flex-col">
                 {/* discount price */}
-                <span className="w-fit text-xs font text-gray relative before:content-[''] before:h-[0.5px] before:w-full before:bg-g-primary before:absolute before:top-[6px] before:rotate-[-7deg]">
-                  {props.discount !== null &&
-                    Number(props.price).toLocaleString("fa-ir")}
-                </span>
+
+                {props.discount !== null && (
+                  <span className="w-fit text-xs font text-gray relative before:content-[''] before:h-[0.5px] before:w-full before:bg-g-primary before:absolute before:top-[6px] before:rotate-[-7deg]">
+                    {Number(props.price).toLocaleString("fa-ir")}
+                  </span>
+                )}  
+
                 <div className="flex items-center gap-1">
                   <span className="text-g-primary font-yekanbakh-bold">
                     {props.discount === null
@@ -60,7 +63,6 @@ export default function ProductList(props) {
                   className="btn-primary py-1 px-3 text-xs rounded-lg font-yekanbakh"
                   onClick={() => {
                     addToCart(props.all);
-              
                   }}
                 >
                   خرید <HiShoppingBag className="fill-white" />
@@ -70,7 +72,6 @@ export default function ProductList(props) {
           </div>
         </div>
       </div>
-    
     </>
   );
 }
