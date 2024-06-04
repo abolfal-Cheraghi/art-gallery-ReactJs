@@ -13,7 +13,7 @@ export default function SelectBox({
 }) {
   return (
     <>
-      <div className={`w-[${width}] max-w-md`}>
+      <div className={`w-[${width}]`}>
         <Field>
           <div className="relative">
             <Select

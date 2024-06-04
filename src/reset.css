@@ -8,3 +8,18 @@ input[type="search"]::-webkit-search-results-decoration {
 input[type="search"]:focus {
   box-shadow: none;
 }
+input {
+  border: none;
+}
+textarea {
+  border: none;
+}
+input[type="number"] {
+  border: 1px solid #eeeeee;
+  padding: 0 2px 0 0;
+}
+/* table */
+thead * {
+  font-family: "Rokh" ;
+  font-size: 16px;
+}

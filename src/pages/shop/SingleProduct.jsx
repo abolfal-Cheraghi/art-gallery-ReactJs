@@ -24,6 +24,7 @@ import { MdDashboard } from "react-icons/md";
 import { BiSearchAlt } from "react-icons/bi";
 import { IoMdClose } from "react-icons/io";
 import { BsFullscreen, BsFullscreenExit } from "react-icons/bs";
+
 // swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 // flowbit tabs
@@ -38,6 +39,8 @@ import {
 } from "@headlessui/react";
 import DOMPurify from "dompurify";
 import ProductList from "../../components/product list/ProductList";
+import CommentBox from "../../components/comment box/CommentBox";
+import { ToastContainer, toast } from "react-toastify";
 
 export default function SingleProduct() {
   const params = useParams().productID;
@@ -51,7 +54,9 @@ export default function SingleProduct() {
     products,
   } = useGlobalData();
   const [isPending, startTranstion] = useTransition();
+  const [isPending_Comment, setIsPending_Comment] = useState(false);
   const [dataProduct, setDataProdact] = useState({});
+  const [comments, setComments] = useState([]);
   const [descList, setDescList] = useState([]);
   const { perecentageValue, finalValue } = discountPrice(
     dataProduct.price,
@@ -61,7 +66,17 @@ export default function SingleProduct() {
   const [openModal_Img, setOpenModal_Img] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [tabActive, setTabActive] = useState("desc");
-
+  const [dataForm_Comment, setDataForm_Comment] = useState({});
+  var regexEmail =
+    /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+  var regexFa = /[\u0600-\u06FF]/;
+  const getComment = useCallback(() => {
+    axios
+      .get(`http://localhost:5000/comments/?productID=${params}`)
+      .then((res) => {
+        setComments(res.data);
+      });
+  });
   useEffect(() => {
     // get data this product
     startTranstion(() => {
@@ -70,8 +85,12 @@ export default function SingleProduct() {
         setDescList(res.data["short_desc"]);
         console.log(res.data);
       });
+      // get coomment
+      getComment();
     });
+  }, [params]);
 
+  useEffect(() => {
     // zoom img ref
     const img = imgRef.current;
     img.addEventListener("mousemove", handleMouseMove);
@@ -115,6 +134,109 @@ export default function SingleProduct() {
     }
   };
 
+  // change handler form | inputs , textarea
+  const changeFroms_Handler = (e) => {
+    setDataForm_Comment({
+      ...dataForm_Comment,
+      [e.target.name]: e.target.value,
+    });
+  };
+  // submit handler comment
+  const submitComment_handler = async () => {
+    if (
+      dataForm_Comment["message"] !== "" &&
+      dataForm_Comment["name"] !== "" &&
+      dataForm_Comment["email"] !== ""
+    ) {
+      if (!regexEmail.test(dataForm_Comment["email"])) {
+        toast.warn("ایمیل معتبر نیست!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        if (!regexFa.test(dataForm_Comment["name"])) {
+          toast.warn("نام باید فارسی باشد!", {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } else {
+          setIsPending_Comment(true);
+          const newDataForm = {
+            ...dataForm_Comment,
+            productID: dataProduct.id,
+            profile: "",
+            date: new Date(),
+            reaply: {
+              userID: null,
+              Answer: null,
+            },
+          };
+          setDataForm_Comment(newDataForm);
+          // post comment in dataBase
+          axios
+            .post("http://localhost:5000/comments", newDataForm)
+            .then((res) => {
+              startTranstion(() => {
+                getComment();
+              });
+
+              toast.success("کامنت با موفقیت ارسال شد .", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+              setIsPending_Comment(false);
+              setDataForm_Comment({
+                name: "",
+                email: "",
+                message: "",
+              });
+            })
+            .catch((err) => {
+              toast.error("کامنت ارسال نشد .", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+              setIsPending_Comment(false);
+            });
+        }
+      }
+    } else {
+      toast.warn("لطفا تمام فیلد هارا پر کنید!", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
   return (
     <>
       <section className="single-page-product mt-5">
@@ -200,9 +322,16 @@ export default function SingleProduct() {
                           <GiRoundStar size="14px" />
                         </div>
                         {/* Number of views box */}
-                        <span className="text-s-10 text-[#a3a3a3]">
-                          (بدون دیدگاه)
-                        </span>
+                        <a
+                          className="text-s-10 font-yekanbakh-bold text-[#a3a3a3]"
+                          href="#sec-comment"
+                          onClick={() => {
+                            setTabActive("comment");
+                          }}
+                        >
+                          ({comments.length === 0 ? "بدون " : comments.length}
+                          دیدگاه)
+                        </a>
 
                         {/* add to list favorate */}
                         {!isSaveTo_favorate(dataProduct.id) ? (
@@ -346,7 +475,10 @@ export default function SingleProduct() {
 
           {/* tabs */}
 
-          <div className="teb-box bg-white p-6 rounded-xl flex flex-col gap-2">
+          <div
+            className="teb-box bg-white p-6 rounded-xl flex flex-col gap-2"
+            id="sec-comment"
+          >
             {/* tab item */}
             <div className="items-tab w-fit">
               <div
@@ -372,8 +504,7 @@ export default function SingleProduct() {
                     setTabActive(e.target.value);
                   }}
                 >
-                  نظرات
-                  {/*دریافت تعداد نظرات از سرور که در حال حاضر ما نداریم */}
+                  نظرات ({comments.length})
                 </button>
               </div>
             </div>
@@ -388,23 +519,130 @@ export default function SingleProduct() {
                 ></div>
               </div>
             ) : (
-              <div className="border border-[#d6d6d6] rounded-lg p-4">
+              <div className="border border-[#d6d6d6] rounded-lg p-4 ">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
                   {/* list comments */}
                   <div className="">
                     <span className="font-rokh text-sm">نقد و برسی ها</span>
-                    <p className="text-sm font-yekanbakh-bold text-gray mt-3">
-                      هنوز بررسی‌ای ثبت نشده است.
-                    </p>
+                    {comments.length === 0 && (
+                      <p className="text-sm font-yekanbakh-bold text-gray mt-3">
+                        هنوز بررسی‌ای ثبت نشده است.
+                      </p>
+                    )}
+
+                    {/* wrapper comments */}
+                    <div className="flex flex-col gap-5 max-h-[500px] overflow-y-auto scroll">
+                      {comments.map((comment, index) => (
+                        <>
+                          <CommentBox key={comment.id} {...comment} />
+                          {/* {index + 1 < comments.length && (
+                            <hr className="text-[#e8e8e8] mt-5" />
+                          )} */}
+                        </>
+                      ))}
+                    </div>
                   </div>
 
                   {/* form add comment */}
-                  <div className="flex flex-col gap-4">
+                  <div className="flex flex-col gap-4 px-0 lg:px-10">
                     <p className="paragraph pl-0 lg:pl-14">
-                      اولین کسی باشید که دیدگاهی می نویسد “{dataProduct.name}”
+                      {comments.length === 0 &&
+                        `اولین کسی باشید که دیدگاهی می نویسد “${dataProduct.name}”`}
                       نشانی ایمیل شما منتشر نخواهد شد. بخش‌های موردنیاز
                       علامت‌گذاری شده‌اند *
                     </p>
+
+                    {/* form add comment */}
+                    <form>
+                      {/* wrapper form */}
+                      <div className="wrapper-form flex flex-col gap-6">
+                        {/* rating box */}
+                        <div className="box-input">
+                          <label htmlFor="" className="text-gray text-s-13">
+                            امتیاز شما *
+                          </label>
+                        </div>
+                        {/* your point of view box */}
+                        <div className="box-input">
+                          <label
+                            htmlFor="message"
+                            className="text-gray text-s-13"
+                          >
+                            دیدگاه شما *
+                          </label>
+                          <textarea
+                            id="message"
+                            rows="6"
+                            name="comment"
+                            defaultValue={dataForm_Comment["comment"]}
+                            className="mt-2 block p-4 w-full text-sm text-gray-900 bg-[#F4F4F4] rounded-3xl dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            onChange={changeFroms_Handler}
+                          ></textarea>
+                        </div>
+                        {/* your name box */}
+                        <div className="box-input">
+                          <label
+                            htmlFor="small-input"
+                            className="text-gray text-s-13"
+                          >
+                            نام *
+                          </label>
+                          <input
+                            type="text"
+                            id="small-input"
+                            name="name"
+                            defaultValue={dataForm_Comment["name"]}
+                            className="mt-2 block w-full px-4 py-3 text-gray-900 rounded-3xl bg-[#F4F4F4] text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            onChange={changeFroms_Handler}
+                          />
+                        </div>
+                        {/* email box */}
+                        <div className="box-input ">
+                          <label
+                            htmlFor="small-input"
+                            className="text-gray text-s-13"
+                          >
+                            ایمیل *
+                          </label>
+                          <input
+                            type="text"
+                            id="small-input"
+                            name="email"
+                            defaultValue={dataForm_Comment["email"]}
+                            className="mt-2 block w-full px-4 py-3 text-gray-900 rounded-3xl bg-[#F4F4F4] text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            onChange={changeFroms_Handler}
+                          />
+                        </div>
+                        {/* checkbox save info */}
+                        <div class="flex items-center gap-2">
+                          <input
+                            id="link-checkbox"
+                            type="checkbox"
+                            value="isSave_info"
+                            className="w-4 h-4 text-blue-600 bg-gray-100 border border-gray rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+                            defaultChecked
+                          />
+                          <label
+                            htmlFor="link-checkbox"
+                            className="text-gray text-s-13"
+                          >
+                            ذخیره نام، ایمیل و وبسایت من در مرورگر برای زمانی که
+                            دوباره دیدگاهی می‌نویسم.
+                          </label>
+                        </div>
+
+                        {/* button submit to comments */}
+                        <button
+                          type="button"
+                          className={`btn-secondary w-fit px-8 py-1 ${
+                            isPending_Comment ? "opacity-70" : ""
+                          }`}
+                          onClick={submitComment_handler}
+                        >
+                          ثبت
+                        </button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>

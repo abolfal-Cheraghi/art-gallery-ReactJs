@@ -12,7 +12,8 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import ProductList from "../../components/product list/ProductList";
 import axios from "axios";
 import { useGlobalData } from "../../hooks/useGlobalData";
-
+// icons
+import { TbCategoryPlus } from "react-icons/tb";
 export const contextShop = createContext(null);
 
 export default function Shop() {
@@ -29,22 +30,26 @@ export default function Shop() {
     params: null,
   });
   const [filterByOrder, setFilterByOrder] = useState("");
-  const [disabled_btnFilter, setDisabled_btnFilter] = useState(false);
+  const [disabled_btnFilter, setDisabled_btnFilter] = useState(true);
+  const [showFilterBox_mobile, setShowFilterBox_mobile] = useState(false);
 
   // function fetch data product
 
-  const fetchProduct = async (url) => {
+  const fetchProduct = useCallback(async (url) => {
     try {
       const response = await fetch(`http://localhost:5000/products${url}`);
       const data = await response.json();
       setDataProducts(data.data);
       setPageCount(data.pages);
+      console.log(true);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
-  };
+  });
 
   useEffect(() => {
+    /*return () => {
+      params === params && */
     // Each time the route changes, the filter state is sorted by = with ""
     setFilterByOrder("");
     // get query params and params and save to state
@@ -55,9 +60,8 @@ export default function Shop() {
 
     // get data products
     startTranstion(() => {
-      fetchProduct("?_page=1&_per_page=6");
       if (params["*"] === "" && searchURL["size"] === 0) {
-        setDataProducts(DataProducts);
+        fetchProduct("?_page=1&_per_page=6");
       } else {
         if (params["*"] !== "" && searchURL["size"] === 0) {
           fetchProduct(`?category_Value=${params["*"]}&_page=1&_per_page=6`);
@@ -78,6 +82,7 @@ export default function Shop() {
         }
       }
     });
+    // };
   }, [params]);
 
   // on chnage handler paginate
@@ -187,7 +192,7 @@ export default function Shop() {
           {/* wrapper box */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {/* sidebar filter*/}
-            <div className="right">
+            <div className="right col-span-4 md:col-span-1">
               <contextShop.Provider
                 value={{
                   queries_params,
@@ -196,16 +201,34 @@ export default function Shop() {
                   setDisabled_btnFilter,
                 }}
               >
-                <div className="sticky top-8">
+                <div className="hidden md:block sticky top-8">
                   <FilterBox
                     onChange_category={changeSelect_category}
                     onChange_brand={changeSelect_brand}
                     Apply_filter={ApplyFilter_Handler}
                   />
                 </div>
+                {!showFilterBox_mobile ? (
+                  <button
+                    className="md:hidden btn-secondary px-5 py-2 hover:bg-accent"
+                    onClick={() => {
+                      setShowFilterBox_mobile(true);
+                    }}
+                  >
+                    <TbCategoryPlus /> فیلتر های بیشتر
+                  </button>
+                ) : (
+                  <div className="md:hidden sticky top-8">
+                    <FilterBox
+                      onChange_category={changeSelect_category}
+                      onChange_brand={changeSelect_brand}
+                      Apply_filter={ApplyFilter_Handler}
+                    />
+                  </div>
+                )}
               </contextShop.Provider>
             </div>
-            <div className="col-span-3 flex flex-col gap-7">
+            <div className="col-span-4 md:col-span-3 flex flex-col gap-7">
               {/* top box */}
               <div className="bg-white py-3 px-3.5 flex justify-between items-center rounded-lg border-box">
                 <h2 className="font-rokh-bold text-[#444444] text-lg md:text-xl">
@@ -269,7 +292,7 @@ export default function Shop() {
                 disabledClassName="opacity-30"
                 nextLabel="بعدی"
                 onPageChange={onChangePage}
-                pageCount={pageCount}
+                pageCount={Math.ceil(pageCount)}
                 previousLabel="قبلی"
                 renderOnZeroPageCount={null}
               />

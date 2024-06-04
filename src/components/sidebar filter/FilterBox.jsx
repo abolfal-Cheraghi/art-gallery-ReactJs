@@ -5,7 +5,7 @@ import { brand_products } from "../../data/Brands";
 import { contextShop } from "../../pages/shop/Shop";
 import { useNavigate } from "react-router-dom";
 // flowbit
-import { Button, Tooltip } from "flowbite-react";
+
 export default function FilterBox(props) {
   const { categoryProducts } = useGlobalData();
   const { queries_params, set_queries_params, disabled_btnFilter } =
@@ -25,8 +25,6 @@ export default function FilterBox(props) {
     set_queries_params({ query: null, brand: null });
     navigate("/shop");
   });
-
-  
 
   return (
     <>
@@ -67,13 +65,15 @@ export default function FilterBox(props) {
 
             {/* category */}
             <SelectBox
+              width="100%"
               label="دسته بندی محصولات ..."
               onchange={props.onChange_category}
               bg="bg-white"
               selected={queries_params.params === null ? true : false}
             >
-              {categoryProducts.map((category) => (
+              {categoryProducts.map((category, index) => (
                 <option
+                  key={index + 1}
                   value={category.category_Value}
                   selected={
                     queries_params.params === category.category_Value
@@ -88,13 +88,15 @@ export default function FilterBox(props) {
 
             {/* brands */}
             <SelectBox
+              width="100%"
               label="برند محصولات..."
               onchange={props.onChange_brand}
               bg="bg-white"
               labelSelcted={queries_params.query === null ? true : false}
             >
-              {brand_products.map((brand) => (
+              {brand_products.map((brand, index) => (
                 <option
+                  key={index + 1}
                   value={brand.value}
                   selected={queries_params.query === brand.value ? true : false}
                 >
@@ -116,15 +118,13 @@ export default function FilterBox(props) {
               اعمال فیلتر ها
             </button>
             {showBtn_removeFilter && (
-              <Tooltip content="Tooltip content" className="bg-g-primary px-4">
-                <button
-                  type="button"
-                  className="w-full text-sm py-2.5 text-center rounded-lg duration-500  text-g-secondary bg-white outline outline-1 hover:bg-g-secondary hover:text-white"
-                  onClick={btnRemoveAll_filter}
-                >
-                  حذف فیلتر ها
-                </button>
-              </Tooltip>
+              <button
+                type="button"
+                className="w-full text-sm py-2.5 text-center rounded-lg duration-500  text-g-secondary bg-white outline outline-1 hover:bg-g-secondary hover:text-white"
+                onClick={btnRemoveAll_filter}
+              >
+                حذف فیلتر ها
+              </button>
             )}
           </div>
         </div>

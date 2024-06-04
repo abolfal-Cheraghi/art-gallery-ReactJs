@@ -57,8 +57,8 @@ function Header() {
                     {/* list menu mobile */}
                     <div>
                       <ul className="flex flex-col gap-5 ">
-                        {menuNavbar.map((item) => (
-                          <li className="text-s-13 text-accent ">
+                        {menuNavbar.map((item, index) => (
+                          <li key={index} className="text-s-13 text-accent ">
                             <NavLink
                               to={item.path}
                               className="font-yekanbakh-bold"
@@ -128,7 +128,7 @@ function Header() {
 
               {/* btn go to page account */}
               <button className="bg-g-secondary text-white rounded-xl flex gap-2 items-center font-YekanBakh-bold  text-xs  p-2 md:p-3 xl:px-6 relative">
-                <span className="hidden xl:flex">ورود / ثبت</span>
+                <span className="hidden xl:flex">ورود / ثبت نام</span>
                 <FaUser className="fill-white xl:fill-accent " size="15px" />
               </button>
             </div>
@@ -137,8 +137,11 @@ function Header() {
         <div className="header-bottom hidden md:flex md:items-center md:justify-center bg-[#DBDFEA] h-[60px] rounded-b-2xl px-6">
           <div className="flex items-center justify-center">
             <ul className="flex gap-[50px]">
-              {menuNavbar.map((item) => (
-                <li className="md:text-s-13 lg:text-sm text-accent ">
+              {menuNavbar.map((item, index) => (
+                <li
+                  key={index}
+                  className="md:text-s-13 lg:text-sm text-accent "
+                >
                   <NavLink to={item.path} className="font-yekanbakh-bold">
                     {item.name}
                   </NavLink>

@@ -4,6 +4,7 @@ import React, {
   memo,
   useCallback,
   useEffect,
+  useRef,
   useState,
 } from "react";
 import discountPrice from "../functions/discountPrice";
@@ -31,10 +32,14 @@ function GlobalProvider({ children }) {
   const [isPending, setIsPending] = useState(true);
   // list favorate products
   const [ListFavorate_Product, setListFavorate_Product] = useState([]);
-
+  // const ListFavorate_ProductRef = useRef(ListFavorate_Product);
   // list cart
   const [cart, setCart] = useState([]);
   const [totalCart, setTotalCart] = useState(0);
+
+  const updateLocalstorage_fav = useCallback(() => {
+    localStorage.setItem("listFavorate", JSON.stringify(ListFavorate_Product));
+  }, [ListFavorate_Product]);
 
   // when is changed list carts
   useEffect(() => {
@@ -42,15 +47,16 @@ function GlobalProvider({ children }) {
       const arrayPrice = cart.map((i) => i.finalPrice * i.quantity);
       const total = arrayPrice.reduce((prev, current) => prev + current, 0);
       setTotalCart(total);
+    } else {
+      setTotalCart(0);
     }
   }, [cart]);
   /* functions 
   add to cart 
   & remove to cart 
   & remove All */
-  const addToCart = (newObject) => {
+  const addToCart = useCallback((newObject) => {
     const existingItem = cart.find((item) => item.id === newObject.id);
-
     if (!existingItem) {
       const { perecentageValue, finalValue } = discountPrice(
         newObject.price,
@@ -68,23 +74,21 @@ function GlobalProvider({ children }) {
       );
       setCart(updatedCart);
     }
-
     toast.success("محصول به سبد خرید اضافه شد.", {
       position: "top-right",
-      autoClose: 1000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      progress: undefined,
       theme: "light",
     });
-  };
-  function removeTo_Cart(id) {
+  });
+  const removeTo_Cart = useCallback((id) => {
     setCart((prevState) => {
       const updatedCart = prevState.map((item) => {
         if (item.id === id) {
-          if (item.quantity === 1) {
+          if (item.quantity === 1 || item.quantity === 0) {
             return null; // Remove this item from the cart
           } else {
             return { ...item, quantity: item.quantity - 1 }; // Decrease the quantity of this item
@@ -95,15 +99,38 @@ function GlobalProvider({ children }) {
 
       return updatedCart.filter((item) => item !== null); // Remove null items from the cart
     });
-  }
+  });
+
+  // function change quantity
+  const changeQuantity_Cart = useCallback((id, quantityUpdata) => {
+    if (quantityUpdata === 0) {
+      const updatedCart = cart.filter((item) => item.id !== id);
+      setCart(updatedCart);
+    } else {
+      setCart((prev) => {
+        const updatedCart = prev.map((product) => {
+          if (product.id === id) {
+            return { ...product, quantity: Number(quantityUpdata) };
+          } else {
+            return product;
+          }
+        });
+        return updatedCart;
+      });
+    }
+  });
   // function removeAll_cart() {}
-  function isTo_cart(id) {
+  const isTo_cart = useCallback((id) => {
     if (!cart.some((i) => i.id === id)) {
       return false;
     } else {
       return true;
     }
-  }
+  });
+  // Added to localstorage when an item is added to the cart
+  // useEffect(() => {
+  //   localStorage.setItem("cart", JSON.stringify(cart));
+  // }, [cart]);
 
   /*functions
   add to list favorate , 
@@ -122,7 +149,7 @@ function GlobalProvider({ children }) {
     });
     toast.success("محصول به لیست علاقه مندی ها اضافه شد.", {
       position: "top-right",
-      autoClose: 1000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -139,7 +166,7 @@ function GlobalProvider({ children }) {
     });
     toast.success("محصول از لیست علاقه مندی ها حذف شد.", {
       position: "top-right",
-      autoClose: 1000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -158,18 +185,7 @@ function GlobalProvider({ children }) {
   };
 
   // useEfeect when update is list favorate
-  useEffect(() => {
-    // get list favorate | localstorage
-    setListFavorate_Product(() => {
-      const listF = localStorage.getItem("listFavorate");
-      return JSON.parse(listF);
-    });
 
-    localStorage.setItem("listFavorate", JSON.stringify(ListFavorate_Product));
-  }, [ListFavorate_Product]);
-
-  // useEffect update list favorate
-  useEffect(() => {}, [ListFavorate_Product]);
   // useEfect  un mount web
   const getDataCallback = useCallback(() => {
     axios.get("http://localhost:5000/menu").then((res) => {
@@ -220,7 +236,19 @@ function GlobalProvider({ children }) {
 
   useEffect(() => {
     getDataCallback();
+    // get list cart | localstorage
+    // const cartData = localStorage.getItem("cart");
+    // setCart(cartData ? JSON.parse(cartData) : []);
+
+    // get list favorate | localstorage
+    setListFavorate_Product((setListFavorate_Product, ListFavorate_Product) => {
+      return JSON.parse(localStorage.getItem("listFavorate"));
+    });
   }, []);
+
+  useEffect(() => {
+    updateLocalstorage_fav();
+  }, [ListFavorate_Product, updateLocalstorage_fav]);
 
   return (
     <globalContext.Provider
@@ -244,6 +272,7 @@ function GlobalProvider({ children }) {
         lengthCart: cart.length,
         totalCart,
         addToCart,
+        changeQuantity_Cart,
         removeTo_Cart,
         // removeAll_cart,
         isTo_cart,
@@ -265,7 +294,6 @@ function GlobalProvider({ children }) {
       {children}
 
       {/* toastify |When a product is added to the cart  */}
-      <ToastContainer rtl />
     </globalContext.Provider>
   );
 }

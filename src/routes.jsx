@@ -1,3 +1,4 @@
+import ChangeRoot_checkout from "./components/ChangeRoot";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
@@ -33,7 +34,11 @@ export const myRoutes = [
   },
   {
     path: "/checkout",
-    element: <Checkout />,
+    element: (
+      <ChangeRoot_checkout>
+        <Checkout />
+      </ChangeRoot_checkout>
+    ),
   },
   {
     path: "/blog",

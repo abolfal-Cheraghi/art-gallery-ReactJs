@@ -1,16 +1,19 @@
-import React, { useEffect } from "react";
+import React, { memo, useCallback, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { HiShoppingBag } from "react-icons/hi2";
 import "./ProductList.css";
 import discountPrice from "../../functions/discountPrice";
 import { useGlobalData } from "../../hooks/useGlobalData";
-import { ToastContainer } from "react-toastify";
-export default function ProductList(props) {
+function ProductList(props) {
   const { perecentageValue, finalValue } = discountPrice(
     props.price,
     props.discount
   );
   const { addToCart } = useGlobalData();
+
+  const handler_addToCart = useCallback(() => {
+    addToCart(props.all);
+  });
 
   return (
     <>
@@ -46,7 +49,7 @@ export default function ProductList(props) {
                   <span className="w-fit text-xs font text-gray relative before:content-[''] before:h-[0.5px] before:w-full before:bg-g-primary before:absolute before:top-[6px] before:rotate-[-7deg]">
                     {Number(props.price).toLocaleString("fa-ir")}
                   </span>
-                )}  
+                )}
 
                 <div className="flex items-center gap-1">
                   <span className="text-g-primary font-yekanbakh-bold">
@@ -61,9 +64,7 @@ export default function ProductList(props) {
                 <button
                   type="button"
                   className="btn-primary py-1 px-3 text-xs rounded-lg font-yekanbakh"
-                  onClick={() => {
-                    addToCart(props.all);
-                  }}
+                  onClick={handler_addToCart}
                 >
                   خرید <HiShoppingBag className="fill-white" />
                 </button>
@@ -75,3 +76,5 @@ export default function ProductList(props) {
     </>
   );
 }
+
+export default memo(ProductList);

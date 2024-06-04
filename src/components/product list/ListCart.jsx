@@ -10,7 +10,6 @@ export default function ListCart(props) {
   const removeTo_cart_Handler = () => {
     removeTo_Cart(props.id);
   };
-  console.log(container_cartList.current);
   return (
     <div
       className="container-list-cart duration-500 ease-in "

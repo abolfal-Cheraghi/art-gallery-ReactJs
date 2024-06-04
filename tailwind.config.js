@@ -25,10 +25,10 @@ module.exports = {
         "gray-dark": "#dddddd",
       },
       fontFamily: {
-        yekanbakh: ["YekanBakh"],
-        "yekanbakh-bold": ["YekanBakh-bold"],
-        rokh: ["Rokh"],
-        "rokh-bold": ["Rokh-Bold"],
+        yekanbakh: ["YekanBakh !important"],
+        "yekanbakh-bold": ["YekanBakh-bold !important"],
+        rokh: ["Rokh !important"],
+        "rokh-bold": ["Rokh-Bold !important"],
       },
       fontSize: {
         "s-13": "0.8125rem",

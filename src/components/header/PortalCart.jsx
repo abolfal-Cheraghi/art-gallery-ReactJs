@@ -84,10 +84,9 @@ export default function PortalCart({ children }) {
                     )}
                     {/* wrapper products */}
                     <div className="scroll mt-6 grid grid-cols-1 gap-2 max-h-[450px] overflow-y-auto pl-5">
-                      {cart.map((pr) => (
+                      {cart.map((pr, index) => (
                         <>
-                          <ListCart key={pr.id} {...pr} />
-                          <hr className=" text-[#d1d1d1]" />
+                          <ListCart key={index} {...pr} />
                         </>
                       ))}
                     </div>
